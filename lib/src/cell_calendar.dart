@@ -60,6 +60,7 @@ class CellCalendar extends StatelessWidget {
   Widget build(BuildContext context) {
     return ProviderScope(
       child: CalendarPageView(
+        paddingDate: paddingDate,
         headerProperty: headerProperty ?? HeaderProperty(),
         weekProperty: weekProperty ?? WeekProperty(),
         cellCalendarPageController: cellCalendarPageController,
@@ -136,6 +137,7 @@ class CalendarPageView extends HookConsumerWidget {
                 cellCalendarPageController ?? CellCalendarPageController(),
             itemBuilder: (context, index) {
               return CalendarPage(
+                paddingDate: paddingDate,
                 weekProperty: weekProperty,
                 visiblePageDate: index.visibleDateTime,
                 daysOfTheWeekBuilder: daysOfTheWeekBuilder,
@@ -221,6 +223,7 @@ class CalendarPage extends StatelessWidget {
                 5,
                 (index) {
                   return DaysRow(
+                    paddingDate: paddingDate,
                     rowIndex: index,
                     weekProperty: weekProperty,
                     visiblePageDate: visiblePageDate,

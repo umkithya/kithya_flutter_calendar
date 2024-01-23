@@ -49,6 +49,7 @@ class DaysRowState extends State<DaysRow> {
       child: Row(
         children: widget.dates.asMap().entries.map((e) {
           return DayCell(
+            paddingDate: widget.paddingDate,
             cellIndex: e.key,
             rowIndex: widget.rowIndex,
             weekProperty: widget.weekProperty,
