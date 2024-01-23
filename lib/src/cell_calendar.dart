@@ -33,7 +33,8 @@ class CellCalendar extends StatelessWidget {
       this.onCellTapped,
       required this.todayMarkColor,
       required this.todayTextColor,
-      this.headerProperty});
+      this.headerProperty,
+      this.paddingDate});
   final CellCalendarPageController? cellCalendarPageController;
 
   /// Builder to show days of the week labels
@@ -47,6 +48,7 @@ class CellCalendar extends StatelessWidget {
   final TextStyle? dateTextStyle;
   final WeekProperty? weekProperty;
   final HeaderProperty? headerProperty;
+  final EdgeInsets? paddingDate;
 
   final List<CalendarEvent> events;
   final void Function(DateTime firstDate, DateTime lastDate)? onPageChanged;
@@ -77,6 +79,7 @@ class CellCalendar extends StatelessWidget {
 class CalendarPageView extends HookConsumerWidget {
   const CalendarPageView({
     super.key,
+    this.paddingDate,
     this.weekProperty,
     this.headerProperty,
     required this.cellCalendarPageController,
@@ -91,6 +94,7 @@ class CalendarPageView extends HookConsumerWidget {
   });
   final CellCalendarPageController? cellCalendarPageController;
   final HeaderProperty? headerProperty;
+  final EdgeInsets? paddingDate;
 
   /// Builder to show days of the week labels
   ///
@@ -174,7 +178,8 @@ class CalendarPage extends StatelessWidget {
       required this.todayMarkColor,
       required this.todayTextColor,
       required this.events,
-      this.weekProperty});
+      this.weekProperty,
+      this.paddingDate});
   final DateTime visiblePageDate;
   final DaysBuilder? daysOfTheWeekBuilder;
   final TextStyle? dateTextStyle;
@@ -183,6 +188,8 @@ class CalendarPage extends StatelessWidget {
   final Color todayTextColor;
   final List<CalendarEvent> events;
   final WeekProperty? weekProperty;
+  final EdgeInsets? paddingDate;
+
   List<DateTime> _getCurrentDays(DateTime dateTime) {
     final List<DateTime> result = [];
     final firstDay = _getFirstDay(dateTime);

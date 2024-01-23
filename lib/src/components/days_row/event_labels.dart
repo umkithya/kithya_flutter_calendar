@@ -82,7 +82,7 @@ class EventLabels extends HookConsumerWidget {
               Center(
                 child: Text(
                   "+${eventsOnTheDay.length}",
-                  style: const TextStyle(fontSize: 8),
+                  style: const TextStyle(fontSize: 12),
                   textAlign: TextAlign.center,
                 ),
               )

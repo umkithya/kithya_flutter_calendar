@@ -27,7 +27,7 @@ class MonthYearLabel extends HookConsumerWidget {
     return monthYearLabelBuilder?.call(currentDateTime) ??
         Padding(
           padding: const EdgeInsets.only(
-            top: 12,
+            top: 0,
             bottom: 12,
             left: 18,
             right: 8,
@@ -49,6 +49,8 @@ class MonthYearLabel extends HookConsumerWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
+                      splashRadius: 25,
+                      visualDensity: VisualDensity.compact,
                       onPressed: () {
                         if (controller != null) {
                           ref.read(indexProvider.notifier).state = index - 1;
@@ -65,6 +67,8 @@ class MonthYearLabel extends HookConsumerWidget {
                       iconSize: 16,
                     ),
                     IconButton(
+                        splashRadius: 25,
+                        visualDensity: VisualDensity.compact,
                         onPressed: () {
                           if (controller != null) {
                             ref.read(indexProvider.notifier).state = index + 1;

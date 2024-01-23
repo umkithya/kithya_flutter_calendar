@@ -22,11 +22,14 @@ class DaysRow extends StatefulWidget {
     required this.events,
     this.weekProperty,
     required this.rowIndex,
+    this.paddingDate,
   }) : super(key: key);
 
   final List<DateTime> dates;
   final DateTime visiblePageDate;
   final TextStyle? dateTextStyle;
+  final EdgeInsets? paddingDate;
+
   final Future<bool?> Function(DateTime)? onCellTapped;
   final Color todayMarkColor;
   final Color todayTextColor;
@@ -70,6 +73,7 @@ class DayCell extends HookConsumerWidget {
   const DayCell({
     super.key,
     required this.cellIndex,
+    this.paddingDate,
     required this.rowIndex,
     required this.date,
     required this.visiblePageDate,
@@ -85,12 +89,15 @@ class DayCell extends HookConsumerWidget {
   final DateTime date;
   final DateTime visiblePageDate;
   final TextStyle? dateTextStyle;
+
   // final void Function(DateTime)? onCellTapped;
   final Future<bool?> Function(DateTime)? onCellTapped;
   final Color todayMarkColor;
   final Color todayTextColor;
   final List<CalendarEvent> events;
   final WeekProperty? weekProperty;
+  final EdgeInsets? paddingDate;
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final selectIndex = ref.watch(selectIndexProvider);
@@ -127,18 +134,16 @@ class DayCell extends HookConsumerWidget {
             },
             child: Column(
               children: [
-                const SizedBox(
-                  height: 10,
-                ),
-                DayLabel(
-                  isHightlight: selectIndex == "[$rowIndex][$cellIndex]",
-                  weekProperty: weekProperty,
-                  date: date,
-                  visiblePageDate: visiblePageDate,
-                  dateTextStyle: dateTextStyle,
-                ),
-                const SizedBox(
-                  height: 5,
+                Padding(
+                  padding:
+                      paddingDate ?? const EdgeInsets.only(bottom: 3, top: 4),
+                  child: DayLabel(
+                    isHightlight: selectIndex == "[$rowIndex][$cellIndex]",
+                    weekProperty: weekProperty,
+                    date: date,
+                    visiblePageDate: visiblePageDate,
+                    dateTextStyle: dateTextStyle,
+                  ),
                 ),
                 Expanded(
                   child: EventLabels(
@@ -221,8 +226,8 @@ class DayLabel extends StatelessWidget {
         color: Theme.of(context).colorScheme.onSurface);
     final textStyle = caption.merge(dateTextStyle);
     return Container(
-      height: 20,
-      width: 20,
+      height: 20 + (textStyle.fontSize! / 2),
+      width: 20 + (textStyle.fontSize! / 2),
       margin: EdgeInsets.symmetric(vertical: dayLabelVerticalMargin.toDouble()),
       // height: dayLabelContentHeight.toDouble(),
       decoration: BoxDecoration(
